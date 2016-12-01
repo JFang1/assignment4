@@ -4,7 +4,10 @@
 // $.html(), $.text(), etc.
 // keyup events could be helpful to get value of field as the user types
 
-// Referenced: http://api.jquery.com/jquery.ajax/
+// Referenced on how to use ajax: http://api.jquery.com/jquery.ajax/
+// Referenced for making clickable links to Google: http://www.googleguide.com/linking.html
+// Referenced for how to use String.replace(): http://www.w3schools.com/jsref/jsref_replace.asp
+
 
 var returnedData;
 var dataArray = [];
@@ -51,12 +54,12 @@ $('.flexsearch-input').keyup(function(){
     console.log('Input: ' + input);
     $.each(dataArray, function(dataIndex, dataValue){
       if (dataValue.startsWith(input)) {
-        resultsStr = resultsStr + '<li>' + dataValue + '</li>';
+        resultsStr = resultsStr + '<li><a target=\'_blank\' href=\"http://www.google.com/search?q=' + dataValue.replace(/ /g, '+') + '\">' + dataValue + '</li>';
         console.log(dataValue);
       }
     });
 
-    resultsStr = resultsStr + "</ul>"
+    resultsStr = resultsStr + "</ul>";
 
     $('.predicted-results').html(resultsStr).show();
   }
