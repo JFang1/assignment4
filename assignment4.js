@@ -1,13 +1,7 @@
-// $.on(); for event handling
-// $.show(), $.hide(), $.slideup(), $.slidedown(), $.fadein(), $.fadeout()
-// Add content from requests with something like
-// $.html(), $.text(), etc.
-// keyup events could be helpful to get value of field as the user types
-
 // Referenced on how to use ajax: http://api.jquery.com/jquery.ajax/
 // Referenced for making clickable links to Google: http://www.googleguide.com/linking.html
 // Referenced for how to use String.replace(): http://www.w3schools.com/jsref/jsref_replace.asp
-
+// Referenced for how to open a new tab on click: http://stackoverflow.com/questions/13071967/adding-an-onclick-function-to-go-to-url-in-javascript
 
 var returnedData;
 var dataArray = [];
@@ -41,12 +35,13 @@ var dataArray = [];
 
 })(); // end main function
 
+
 $('.flexsearch-input').keyup(function(){
 
-  var resultsStr = "<ul>";
+  var resultsStr = '<ul>';
   var input = document.getElementById('enteredInput').value.toLowerCase();
 
-  if (input == "" || input == null) {
+  if (input == '' || input == null) {
     $('.predicted-results').hide();
   }
   else {
@@ -55,10 +50,16 @@ $('.flexsearch-input').keyup(function(){
         resultsStr = resultsStr + '<li><a target=\'_blank\' href=\"http://www.google.com/search?q=' + dataValue.replace(/ /g, '+') + '\">' + dataValue + '</li>';
       }
     });
-
     resultsStr = resultsStr + "</ul>";
-
     $('.predicted-results').html(resultsStr).show();
-  }
+  } // end else
 
-}) // end keyup handling
+}); // end keyup handling
+
+
+$('.flexsearch-submit').click(function() {
+  var url = 'http://www.google.com/search?q=';
+  url = url + document.getElementById('enteredInput').value.toLowerCase();
+  url = url.replace(/ /g, '+');
+  window.open(url);
+}); // flexsearch-submit click handler

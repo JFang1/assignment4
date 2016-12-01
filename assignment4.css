@@ -32,8 +32,8 @@
 }
 
 .flexsearch-input {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; /* for Chrome, Opera, and Safari */
+  -moz-box-sizing: content-box; /* for Firefox */
   box-sizing: content-box;
   height: 60px;
   width: 100%;
