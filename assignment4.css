@@ -103,9 +103,15 @@ ul {
   max-width: 100%;
   padding: 0 0 10px 10px;
   margin: 0 35px 0 35px;
-  border-color: #888;
-  border-style: solid;
-  border-width: 1px;
-  font-family: 'Helvetica', sans-serif;
-  font-size: 26px;
+  border: 1px solid #888;
+  font: 26px 'Helvetica', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+a:hover {
+  color: #906;
 }

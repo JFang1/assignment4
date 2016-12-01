@@ -47,15 +47,12 @@ $('.flexsearch-input').keyup(function(){
   var input = document.getElementById('enteredInput').value.toLowerCase();
 
   if (input == "" || input == null) {
-    console.log('Nothing in the flexsearch-input!');
     $('.predicted-results').hide();
   }
   else {
-    console.log('Input: ' + input);
     $.each(dataArray, function(dataIndex, dataValue){
       if (dataValue.startsWith(input)) {
         resultsStr = resultsStr + '<li><a target=\'_blank\' href=\"http://www.google.com/search?q=' + dataValue.replace(/ /g, '+') + '\">' + dataValue + '</li>';
-        console.log(dataValue);
       }
     });
 
