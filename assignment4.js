@@ -11,6 +11,7 @@ var dataArray = [];
 
 // The anonymous function below will fire on page load
 (function() {
+
   $.ajax({
     dataType: 'json',
     method: 'GET',
@@ -34,14 +35,14 @@ var dataArray = [];
   }); // end ajax call
 
   $('.predicted-results').hide();
+
 })(); // end main function
 
 $('.flexsearch-input').keyup(function(){
 
-  var matchingResults = [];
-
-  var results = [];
+  var resultsStr = "<ul>";
   var input = document.getElementById('enteredInput').value.toLowerCase();
+
   if (input == "" || input == null) {
     console.log('Nothing in the flexsearch-input!');
     $('.predicted-results').hide();
@@ -50,11 +51,14 @@ $('.flexsearch-input').keyup(function(){
     console.log('Input: ' + input);
     $.each(dataArray, function(dataIndex, dataValue){
       if (dataValue.startsWith(input)) {
-        matchingResults.push(dataValue);
+        resultsStr = resultsStr + '<li>' + dataValue + '</li>';
         console.log(dataValue);
       }
     });
-    $('.predicted-results').show();
+
+    resultsStr = resultsStr + "</ul>"
+
+    $('.predicted-results').html(resultsStr).show();
   }
 
 }) // end keyup handling
