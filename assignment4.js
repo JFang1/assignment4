@@ -1,85 +1,60 @@
-// The anonymous function below will fire on page load
-
-// Some things to consider
-// $.ajax(); to make your requests a little easier. Or the vanilla js way, it's up to you.
 // $.on(); for event handling
-// Remember, selecting elements in jQuery is like selecting them in CSS
-// You'll probably have to manipulate some strings
-// some jQuery functions to help display results
 // $.show(), $.hide(), $.slideup(), $.slidedown(), $.fadein(), $.fadeout()
 // Add content from requests with something like
 // $.html(), $.text(), etc.
 // keyup events could be helpful to get value of field as the user types
 
-// referenced: http://api.jquery.com/jquery.getjson/
+// Referenced: http://api.jquery.com/jquery.ajax/
+
+var returnedData;
+var dataArray = [];
+
+// The anonymous function below will fire on page load
 (function() {
-  console.log('Keepin\'n it clean with an external script!');
+  $.ajax({
+    dataType: 'json',
+    method: 'GET',
+    url: 'http://www.mattbowytz.com/simple_api.json?data=all',
+    success: function(data){
+      $.each(data, function(key, value){
+        if (key === 'data') {
+          returnedData = value;
+          $.each(returnedData, function(subKey, subValue) {
+            dataArray.push(subKey.toLowerCase()); // might as well push the names of the data categories too!
+            $.each(subValue, function(index, element){
+              dataArray.push(element.toLowerCase());
+            });
+          });
+        } // end if
+      }) // end each
+    }, // end success
+    error: function(data){
+      console.log(data);
+    } // end error
+  }); // end ajax call
 
   $('.predicted-results').hide();
-
-  var returnedData;
-  var statusCode;
-  var keysArray = [];
-  var valsArray = [];
-
-  $.getJSON( "http://www.mattbowytz.com/simple_api.json?data=all", function(data) {
-    $.each(data, function(key, val) {
-      if (key==="status") {
-        statusCode = val;
-        console.log(statusCode);
-        if (val != 200) {
-          alert("Request failed!");
-        }
-      }
-      if (key==="data") {
-        returnedData=val;
-        console.log("This is the data: ");
-        console.log(returnedData);
-      }
-    });
-
-    if (statusCode == 200) {
-      JSON.parse(returnedData);
-
-      // valsArray = returnedData.toString().split(/,| /);
-      // var i;
-      // for (i=0; i<valsArray.length; i++) {
-      //   console.log(valsArray[i].toString());
-      // }
-
-      //   "class": "results",
-    //    html: items.join( "" )
-    //  $('.predicted-results').html(items.toString());
-    } // end if (statusCode == 200)
-
-  });
-
-
-})();
-
+})(); // end main function
 
 $('.flexsearch-input').keyup(function(){
+
+  var matchingResults = [];
+
   var results = [];
-  var input = document.getElementById('enteredInput').value;
+  var input = document.getElementById('enteredInput').value.toLowerCase();
   if (input == "" || input == null) {
     console.log('Nothing in the flexsearch-input!');
+    $('.predicted-results').hide();
   }
   else {
-    console.log(input);
+    console.log('Input: ' + input);
+    $.each(dataArray, function(dataIndex, dataValue){
+      if (dataValue.startsWith(input)) {
+        matchingResults.push(dataValue);
+        console.log(dataValue);
+      }
+    });
+    $('.predicted-results').show();
   }
-  // if (input == "" || input == null) {
-  //   $('.predicted-results').hide();
-  // }
-  // else {
-  //   var mBowytzAPI = "http://www.mattbowytz.com/simple_api.json?data=all";
-  //   $.getJSON( mBowytzAPI).done(function( data ) {
-  //     $.each( data.items, function( i, item ) {
-  //       //$( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
-  //       if ( i === 3 ) {
-  //         return false;
-  //       }
-  //     });
-  //   });
 
-  //$('.predicted-results').show();
-})
+}) // end keyup handling
