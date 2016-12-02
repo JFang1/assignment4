@@ -38,6 +38,9 @@ $('.flexsearch-input').keyup(function() {
   var input = document.getElementById('enteredInput').value.toLowerCase();
   var show = 0;
 
+  $('.predicted-results').html(resultsStr).hide();
+
+  // The following if-else blocks seem redundant but prevent all the possible results from showing after backspacing any entered input
   if (input === '' || input === null) {
     $('.predicted-results').hide();
   }
