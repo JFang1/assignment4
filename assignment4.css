@@ -115,3 +115,7 @@ a {
 a:hover {
   color: #906;
 }
+
+input[type='search']::-webkit-search-cancel-button{ /* for getting rid of the x in Chrome, Opera, Safari */
+  -webkit-appearance: none;
+}

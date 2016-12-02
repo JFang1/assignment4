@@ -62,4 +62,4 @@ $('.flexsearch-submit').click(function() {
   url = url + document.getElementById('enteredInput').value.toLowerCase();
   url = url.replace(/ /g, '+');
   window.open(url);
-}); // flexsearch-submit click handler
+}); // end flexsearch-submit click handler

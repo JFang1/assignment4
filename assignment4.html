@@ -13,7 +13,7 @@
         <!-- You'll handle the form with js, so no need for method and action -->
         <form class="flexsearch-form" id="mainForm">
           <div class="flexsearch-input-wrapper">
-            <input class="flexsearch-input" id="enteredInput" type="search" placeholder="search">
+            <input class="flexsearch-input" id="enteredInput" type="search" placeholder="search" autocomplete="off">
           </div>
           <input class="flexsearch-submit" type="submit" value="&#10140;"/>
         </form>
@@ -22,8 +22,9 @@
       </div>
     </div>
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="assignment4.js"></script>
   </body>
 </html>
+
+<!-- referenced this to turn autocomplete off in Firefox: http://stackoverflow.com/questions/1477520/how-to-hide-a-text-inputs-browser-generated-dropdown-list-of-previous-items -->
